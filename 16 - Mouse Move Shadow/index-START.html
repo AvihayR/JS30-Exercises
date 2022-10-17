@@ -35,6 +35,40 @@
   </style>
 
 <script>
+  const hero = document.querySelector('.hero');
+  const text = hero.querySelector('h1');
+  const walk = 100; //100px
+
+
+  function shadow(e){
+    const width = hero.offsetWidth; //static value
+    const height = hero.offsetHeight; //static value
+    let {offsetX: x, offsetY: y} = e; //ES6 destructure of our mouse location
+
+    if(this !== e.target){
+      x = x + e.target.offsetLeft;
+      y = y + e.target.offsetTop;
+    };  
+     //this == the element that we listened on, e.target == the thing it got triggered on
+     
+     //meaning if the listen and the fire on elements are not the same do this: 
+     //add x and y the target element offsetleft and offsettop so it wouldn't be 0. 
+
+
+
+    const xWalk = Math.round((x / width * walk) - (walk / 2));
+    const yWalk = Math.round((y / width * walk) - (walk / 2));
+     //instead of 0~100 we'll get -50/+50
+  
+    text.style.textShadow = `${xWalk}px ${yWalk}px 0 red`;
+
+  };
+
+  hero.addEventListener('mousemove', shadow)
+
 </script>
 </body>
 </html>
+
+
+
